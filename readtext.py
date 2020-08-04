@@ -8,7 +8,8 @@ import scipy
 use_DIR_1 = True
 ## need to be modified manually
 ##########################################
-DIR_1 = 'LOGS_HD209458'
+#DIR_1 = 'LOGS_HD209458'
+DIR_1 = 'LOG_SAM'
 #DIR_1 = 'LOGS_XO1b'
 #DIR_1 = 'LOGS_CCC'
 #DIR_1 = 'LOGS_HD_P=12d5_new_extend5_fixed'

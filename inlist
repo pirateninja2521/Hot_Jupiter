@@ -1,48 +1,47 @@
 
 &star_job
 
-	show_log_description_at_start = .false. 
+  history_columns_file = 'history_columns.list' 
+  profile_columns_file = 'profile_columns.list' 
 
-	save_model_when_terminate = .true.
-	save_model_filename = "rlx_irrad.mod" !'irrad1_test.mod'
+  show_log_description_at_start = .false. 
 
-	history_columns_file = 'history_columns.list' 
-	profile_columns_file = 'profile_columns.list' 
+  save_model_when_terminate = .true.
+  save_model_filename = "rlx_z0.mod" !'irrad2.mod'
 
-	load_saved_model = .false.
-	!saved_model_name = "created.mod"
+  load_saved_model = .true.
+  saved_model_name = "evolve.mod"!'irrad1_test.mod'
 
-	change_initial_net = .true.      
-	new_net_name = 'basic.net'
+  change_initial_net = .true.      
+  new_net_name = 'basic.net'
 
-	eos_file_prefix = 'mesa'
-	kappa_file_prefix = 'gs98'
-	kappa_lowT_prefix = 'lowT_Freedman11'
+  set_initial_model_number = .true.
+  initial_model_number = 0
 
-	relax_initial_irradiation = .true.
-	relax_irradiation_min_steps = 200
-	relax_irradiation_max_yrs_dt = 1d-1
+  set_initial_dt = .true.
+  years_for_initial_dt = 1d3 ! in years
 
-	relax_to_this_irrad_flux = 5d8 ! erg s^-1 cm^-2
-	irrad_col_depth = 300 ! g cm^-2
+  eos_file_prefix = 'mesa'
+  kappa_file_prefix = 'gs98'
+  kappa_lowT_prefix = 'lowT_Freedman11'
 
-	set_tau_factor = .false. !change tau_factor without reconverging.
-	!set_to_this_tau_factor = 100
-	
-	change_lnPgas_flag = .true.
-	new_lnPgas_flag = .true.
+  !set_tau_factor = .true. ! change tau_factor without reconverging.
+  !set_to_this_tau_factor = 100 
 
-	pgstar_flag = .true.
+  change_lnPgas_flag = .true.
+  new_lnPgas_flag = .true.
 
-	create_initial_model = .true.
-	radius_in_cm_for_create_initial_model = 24955500000.0
-		!1.39822e+10!r=2 1.39822e+10!3.1955500000e+10!r=3.7 2.5955500000e+10!3.4955500000e+10 ! in cm
-		
-	mass_in_gm_for_create_initial_model = 1.30962e+30 
-		!1.5986000000e+30!m=0.63 1.1961000000e+30!1.8986000000e+30 !m=8 1.5188800000e+31  in grams
-		
-	max_tries_for_create_initial_model = 200
-	initial_model_relax_num_steps = 0
+  pgstar_flag = .true.
+
+  set_initial_model_number = .true.
+  initial_model_number = 0
+
+  set_initial_age = .true.
+  initial_age = 0
+
+  set_HELM_OPAL_Zs = .true.
+  Z_all_HELM = 1200000.0
+  Z_all_OPAL = 0.05d0
 
 / ! end of star_job namelist
 
@@ -50,60 +49,105 @@
 
 &controls
 
-	initial_Z = 0.02 !0.034  !0.02
-	initial_Y = 0.273 !0.25!0.273
-	
-	mixing_length_alpha = 1.89d0
-	MLT_option = 'Henyey'
-	
-	max_age = 4d7!4.5d9!15d9
-	max_years_for_timestep = 1d9
-	!mesh_delta_coeff = 0.5 
-	T_mix_limit = 0
-	
-	!atm_option = 'grey_and_kap'
-		atm_option = 'T_tau'
-		atm_T_tau_relation = 'Eddington'
-		atm_T_tau_opacity = 'iterated'
+  min_timestep_limit = 1d-16
+  use_gold_tolerances = .false.
+  !use_eosPTEH_for_low_density = .false.
+  !use_eosPTEH_for_high_Z = .false.
 
-	calculate_Brunt_N2 = .false.
-	
-	use_Type2_opacities = .false.
-	
-	min_timestep_limit = 1d-24
-	photo_interval = 50
-	profile_interval = 100
-	history_interval = 30
-	terminal_interval = 20
-	write_header_frequency = 10
+  ! check for retries and backups as part of test_suite
+  ! you can/should delete this for use outside of test_suite
+
+  mesh_delta_coeff = 0.5
+  
+  use_Type2_opacities = .false.
+
+  !initial_mass = 0.001
+  !initial_z = 0.02d0
+
+  mixing_length_alpha = 1.89d0
+  MLT_option = 'Henyey'
+
+  photo_interval = 50
+  profile_interval = 100
+  history_interval = 5
+  terminal_interval = 20
+  write_header_frequency = 10
+      
+  max_age = 5d10!4.5d9
+  max_years_for_timestep = 1d10
+  mesh_delta_coeff = 0.5    
+  T_mix_limit = 0
+
+  atm_option = 'irradiated_grey'
+  atm_irradiated_opacity = 'iterated'
+  
+  atm_irradiated_errtol = 1d-4
+  atm_irradiated_T_eq = 1470 !1470!1430!1260 ! equilibrium temperature based on irradiation
+
+  atm_irradiated_kap_v = 0.004!4d-3 ! opacity for irradiation
+  atm_irradiated_P_surf = 1200000.0!3d4 ! 1 bar in cgs units
+  trace_atm_Paczynski_grey = .True.
+      
+  inject_uniform_extra_heat = 0.0007953341925538774!7.11e-4 !8.5e26/1.1961000000e+30
 
 / ! end of controls namelist
 
 
 &pgstar
+  History_Track1_win_flag = .true.
+  History_Track1_title = 'radius vs t'
+  History_Track1_xname = 'star_age'
+  History_Track1_yname = 'radius'
+  History_Track1_xaxis_label = 't (years)'
+  History_Track1_yaxis_label = 'radius '
+  History_Track1_log_xaxis = .true. ! show log10 of abs value
+  History_Track1_log_yaxis = .false. ! show log10 of abs value
+  History_Track1_reverse_xaxis = .false.
+  !History_Track1_ymax = 0.003
+  !History_Track1_ymin = 3d6
 
-	History_Track1_win_flag = .true.
-	History_Track1_title = 'radius vs t'
-	History_Track1_xname = 'star_age'
-	History_Track1_yname = 'radius'
-	History_Track1_xaxis_label = 't (years)'
-	History_Track1_yaxis_label = 'radius '
-	!History_Track1_ymax = 0.003
-	!History_Track1_ymin = 0
-	History_Track1_log_xaxis = .true. ! show log10 of abs value
-	History_Track1_log_yaxis = .false. ! show log10 of abs value
-	History_Track1_reverse_xaxis = .false.
+	History_Track1_file_flag = .false.
+	History_Track1_file_dir  = 'png/m=0.63_T=1360_ini_r=2/radius'  !'png/m=8_T=1500_ini_r=20_core/radius'
+	History_Track1_file_prefix = 'radius_vs_t_m=0.63_T=1360_ini_r=2'
+	History_Track1_file_interval = 50
 
-	History_Track2_win_flag = .true.
-	History_Track2_title = 'effective_T vs t'
-	History_Track2_xname = 'star_age'
-	History_Track2_yname = 'effective_T'
-	History_Track2_xaxis_label = 't (years)'
-	History_Track2_yaxis_label = 'effective_T '
-	!History_Track2_ymax = 0.003
-	!History_Track2_ymin = 0
-	History_Track2_log_xaxis = .true. ! show log10 of abs value
-	History_Track2_log_yaxis = .false. ! show log10 of abs value
-	History_Track2_reverse_xaxis = .false.
+  History_Track2_win_flag = .true.
+  History_Track2_title = 'effective_T vs t'
+  History_Track2_xname = 'star_age'
+  History_Track2_yname = 'effective_T'
+  History_Track2_xaxis_label = 't (years)'
+  History_Track2_yaxis_label = 'effective_T '
+  !History_Track2_ymax = 0.003
+  !History_Track2_ymin = 0
+  History_Track2_log_xaxis = .true. ! show log10 of abs value
+  History_Track2_log_yaxis = .false. ! show log10 of abs value
+  History_Track2_reverse_xaxis = .false.
+
+	History_Track2_file_flag = .false.
+	History_Track2_file_dir  = 'png/m=0.63_T=1360_ini_r=2/effective_T'  !'png/m=8_T=1500_ini_r=20_core/effective_T'
+	History_Track2_file_prefix = 'effective_T_vs_t_m=0.63_T=1360_ini_r=2'
+	History_Track2_file_interval = 50
+
+
+  Profile_Panels1_win_flag = .true.
+  Profile_Panels1_title = 'Profile Panels1'
+
+  Profile_Panels1_xaxis_name = 'radius'
+  Profile_Panels1_xmin = -101d0
+  Profile_Panels1_xmax = -101d0
+  Profile_Panels1_xmargin = 0d0
+  Profile_Panels1_show_mix_regions_on_xaxis = .false.
+  Profile_Panels1_yaxis_name(:) = 'opacity'
+
+	Profile_Panels1_file_flag = .false.
+	Profile_Panels1_file_dir  = 'png/m=0.63_T=1360_ini_r=2/R_logT_profile'  !'png/m=8_T=1500_ini_r=20_core/effective_T'
+	Profile_Panels1_file_prefix = 'R_logT_profile_m=0.63_T=1360_ini_r=2'
+	Profile_Panels1_file_interval = 50
+  ! top level controls
+
+  !pause = .true. 
+  ! if true, the code waits for user to enter a RETURN on the command line
+      
+
 
 / ! end of pgstar namelist

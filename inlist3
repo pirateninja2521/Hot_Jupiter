@@ -7,10 +7,10 @@
   show_log_description_at_start = .false. 
 
   save_model_when_terminate = .true.
-  save_model_filename = "rlx_irrad.mod" !'irrad2.mod'
+  save_model_filename = "evolve.mod" !'irrad2.mod'
 
   load_saved_model = .true.
-  saved_model_name = "evolve.mod"!'irrad1_test.mod'
+  saved_model_name = "rlx_irrad.mod"!'irrad1_test.mod'
 
   change_initial_net = .true.      
   new_net_name = 'basic.net'
@@ -88,13 +88,13 @@
   atm_irradiated_opacity = 'iterated'
   
   atm_irradiated_errtol = 1d-4
-  atm_irradiated_T_eq = 1447!1470!1430!1260 ! equilibrium temperature based on irradiation
+  atm_irradiated_T_eq = 1470!1470!1430!1260 ! equilibrium temperature based on irradiation
 
   atm_irradiated_kap_v = 0.004!4d-3 ! opacity for irradiation
   atm_irradiated_P_surf = 1200000.0!3d4 ! 1 bar in cgs units
   trace_atm_Paczynski_grey = .True.
 
-  inject_uniform_extra_heat = 0.0004459308807134894!7.11e-4 !8.5e26/1.1961000000e+30
+  inject_uniform_extra_heat = 0.0007953341925538774!7.11e-4 !8.5e26/1.1961000000e+30
 
 / ! end of controls namelist
 
