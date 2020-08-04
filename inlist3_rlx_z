@@ -96,6 +96,9 @@
 
   inject_uniform_extra_heat = <<extraheat>>!7.11e-4 !8.5e26/1.1961000000e+30
 
+  !ignore warnings
+    warn_when_large_rel_run_E_err = 2
+
 / ! end of controls namelist
 
 

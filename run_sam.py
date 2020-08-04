@@ -54,8 +54,8 @@ def init_inlist4():
 	h.write(g)
 	h.close()
 
-shutil.copytree('LOGS',LOGS_name)
-exit()
+os.system('rm -f *.mod')
+os.system('ls')
 
 cnt=0 #Sam
 ratio_arr=[]
@@ -124,7 +124,7 @@ while ('1' == ans):
 	if os.path.exists(LOGS_name):
 		print('directory ' + LOGS_name + ' has existed. \n')
 		ans2 = input('replace it (1/0)?\n')
-		if 	(1 == ans2):
+		if 	('1' == ans2):
 			shutil.rmtree(LOGS_name)
 			shutil.copytree('LOGS',LOGS_name)
 			break
