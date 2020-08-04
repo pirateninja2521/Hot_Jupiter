@@ -34,14 +34,6 @@
 
 	pgstar_flag = .true.
 
-	! controls for adding core of a certain density (alternatively, could fix radius)
-		relax_core =  <<putincore>> !default false
-		new_core_mass =  <<core_mass>> !0.0001326!0.0001326 0.139Mj!1.50221e-05 ! or pick what you'd like
-		core_avg_rho =  <<core_density>> !5.50 ! g/cm^3
-		core_avg_eps = 0.00 ! ergs/g/sec !from Arras notes, this is the heat coming from radioactive decay.
-		dlg_core_mass_per_step = 0.05     ! decrease if convergence problems
-		relax_core_years_for_dt = 0.1     ! increase(?) if convergence problems
-	
 	create_initial_model = .true.
 	radius_in_cm_for_create_initial_model = <<initial_radius>>
 		!1.39822e+10!r=2 1.39822e+10!3.1955500000e+10!r=3.7 2.5955500000e+10!3.4955500000e+10 ! in cm

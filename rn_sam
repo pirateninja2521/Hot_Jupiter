@@ -37,9 +37,9 @@ function do_one {
 }
 
 date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
-do_one inlist1 irrad1.mod
-do_one inlist2 irrad2.mod
-do_one inlist3 irrad3.mod
+do_one inlist2 rlx_irrad.mod
+do_one inlist3 evolve.mod
+do_one inlist4 rlx_z0.mod
 date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
 
 echo 'finished all inlists for irradiated_planet'

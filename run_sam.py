@@ -3,39 +3,57 @@
 import numpy as np
 import shutil, sys, os, math
 import mesa_reader as mr
+from param_HD209 import *
 
-msun = 1.989e33
-rsun = 6.955e10
-mjup = 1.898e30
-rjup = 7.149e9
-mearth = 5.97e27
-sigma=5.67e-5
-au = 1.496e13
-L_sun = 3.839e33
-expect_r = 0.1396907404744788
+def init_inlist2():
+    os.system("cp inlist2_rlx_irrad inlist2")
+    f = open('inlist2', 'r')
+    g = f.read()
+    f.close()
 
-z = 0.02                    # metallicity of both planet and star
-y = 0.273                   # helium fraction of both planet and (initial) star
-Teq = 1447
-total_extraheat = 5.84e26
-P_surf = 1.2e6
-kappa_v = 4e-3
+    print('initial mass = ',mass_initial,'jupiter mass')
+    g = g.replace("<<initial_radius>>", str(radius_initial))
+    g = g.replace("<<initial_mass>>", str(mass_initial*mjup))
+    g = g.replace("<<z>>",str(z))
+    g = g.replace("<<y>>",str(y))
+    g = g.replace("<<smwtfname>>", '"rlx_irrad.mod"')
+    h = open('inlist2', 'w')
+    h.write(g)
+    h.close()
 
-LOGS_name = 'LOGS_SAM'
+def init_inlist3():
+    os.system("cp inlist3_rlx_z inlist3")
+    f = open('inlist3', 'r')
+    g = f.read()
+    f.close()
+    g = g.replace("<<extraheat>>",str(extraheat))
+    g = g.replace("<<smwtfname>>", '"rlx_irrad.mod"')
+    g = g.replace('<<rdprvsname>>','"evolve.mod"')
+    g = g.replace('<<new_z>>',str(new_z))
+    g = g.replace("<<Teq>>", str(Teq) ) 
+    g = g.replace("<<z_HELM>>", str(Z_all_HELM) ) 
+    g = g.replace("<<P_surf>>", str(P_surf) ) 
+    g = g.replace("<<kap_v>>", str(kappa_v) ) 
+    h = open('inlist3', 'w')
+    h.write(g)
+    h.close()
 
-rp = 0 
-record = 0
-radius_initial = 2.4955500000e+10 #4.4955500000e+10 #1.3e10 for m=0.69
-Z_all_HELM = 0.06 # parameter to change e.o.s 
-extraheat = total_extraheat/mass_initial/mjup
-T_HEAT = []
-T_radius = []
+def init_inlist4():
+    os.system("cp inlist4_irrad inlist4")
+    f = open('inlist4', 'r')
+    g = f.read()
+    f.close()
+    g = g.replace("<<extraheat>>",str(extraheat))
+    g = g.replace("<<rdprvsname>>",'"evolve.mod"')
+    g = g.replace("<<smwtfname>>", '"rlx_z0.mod"')
+    g = g.replace("<<Teq>>", str(Teq) ) 
+    g = g.replace("<<z_HELM>>", str(P_surf) ) 
+    g = g.replace("<<P_surf>>", str(P_surf) ) 
+    g = g.replace("<<kap_v>>", str(kappa_v) ) 
+    h = open('inlist4', 'w')
+    h.write(g)
+    h.close()
 
-TEM_array = []
-RAD_array = []
-GRADA_array = []
-GD_array = []
-MW_array = []
 
 cnt=0 #Sam
 ratio_arr=[]
@@ -44,14 +62,50 @@ while loop:
     cnt+=1
     print('extraheat',total_extraheat)
 
+    init_inlist2()
+    init_inlist3()
+    init_inlist4()
+    os.system('./rn_sam')
+
+    m = mr.MesaData()
+    g = mr.MesaLogDir()
+    p = g.profile_data()
+    optical_p = p.data('tau')
+    grav_p    = p.data('grav')
+    pressure_p= p.data('pressure')
+    opacity_p = p.data('opacity')
+    radius_p = p.data('radius')
+    logT_p   = p.data('logT')
+    grada_p  = p.data('grada')
+    cp_p = p.data('cp')
+    eta_p = p.data('eta')
+    mu_p = p.data('mu')
+    
+    print(total_extraheat,radius_p[0])
+    print(optical_p[0],'surface tau')
+    print(kappa_v/opacity_p[0],'kap_v/kap_th')
+    print(np.power(10,logT_p[0]),'surface temp')
+    kk = 0
+    op_v = kappa_v*pressure_p/grav_p
+    rp = radius_p[0]
+    record = record + 1
+    T_HEAT.append(total_extraheat)
+    T_radius.append(rp) 
+
+    TEM_array.append(logT_p)
+    RAD_array.append(radius_p)
+    GRADA_array.append(grada_p)
+    GD_array.append( eta_p)
+    MW_array.append( mu_p)
+
+    print (T_HEAT, T_radius,'radius_here')
 
     print(abs(expect_r-rp)/expect_r)
     ratio_arr.append((expect_r-rp)/expect_r)
-	if abs(expect_r-rp)/expect_r <= 0.01:
+    if abs(expect_r-rp)/expect_r <= 0.01:
         loop = False
     else:
         Factor = 15 # if iteration not converge, choose a smaller Factor 
-		extraheat *= (1+Factor*(expect_r-rp)/expect_r)#6e+27/mass_initial/mjup
-		total_extraheat *= (1+Factor*(expect_r-rp)/expect_r)
-    
-    
+        extraheat *= (1+Factor*(expect_r-rp)/expect_r)#6e+27/mass_initial/mjup
+        total_extraheat *= (1+Factor*(expect_r-rp)/expect_r)
+    break
