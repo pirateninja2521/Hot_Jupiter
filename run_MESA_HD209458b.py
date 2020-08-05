@@ -78,18 +78,19 @@ mass_initial = 0.69          #1.133#1.488  #jupiter
 
 
 
-total_extraheat = 5.84e26#3.8418676605428115e+26
-#total_extraheat = 2.84e26#3.8418676605428115e+26
+total_extraheat = 5.84e26 #3.8418676605428115e+26
+#total_extraheat = 2.84e26 #3.8418676605428115e+26
 #P_surf = 3.5e5
 #kappa_v = 3e-2
-#total_extraheat = 7.15e26#3.8418676605428115e+26
+#total_extraheat = 7.15e26 #3.8418676605428115e+26
 #total_extraheat = 8.0e27
 P_surf = 1.2e6
 #P_surf = 1.7e6
 #P_surf = 6.0e5
 kappa_v = 4e-3
 #LOGS_name = 'LOGS_XO1b'
-LOGS_name = 'LOGS_HD209458'
+#LOGS_name = 'LOGS_HD209458'
+LOGS_name = 'LOGS_WASP_19b'
 stop_loop =  False
 
 ###################################################################################

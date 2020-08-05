@@ -6,17 +6,18 @@ mearth = 5.97e27
 sigma=5.67e-5
 au = 1.496e13
 L_sun = 3.839e33
-expect_r = 0.1396907404744788
+
+expect_r = 0.1424660531991373
 
 z = 0.02                    # metallicity of both planet and star
 new_z = 0.02                #for relax_z
 
 
 y = 0.273                   # helium fraction of both planet and (initial) star
-Teq = 1470
-mass_initial = 0.69   
+Teq = 2066
+mass_initial = 1.133   
 
-total_extraheat = 5.84e26
+total_extraheat = 2.84e26
 P_surf = 1.2e6
 kappa_v = 4e-3
 

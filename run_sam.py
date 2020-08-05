@@ -3,7 +3,8 @@
 import numpy as np
 import shutil, sys, os, math
 import mesa_reader as mr
-from param_HD209 import *
+#from param_HD209458b import *
+from param_WASP_19b import *
 
 def init_inlist2():
 	os.system("cp inlist2_rlx_irrad inlist2")
@@ -54,15 +55,14 @@ def init_inlist4():
 	h.write(g)
 	h.close()
 
-os.system('rm -f *.mod')
-os.system('ls')
-
 cnt=0 #Sam
 ratio_arr=[]
 loop=True
 while loop:
+	os.system('rm -f *.mod')
+	os.system('rm -f LOGS/*')
 	cnt+=1
-	print('extraheat',total_extraheat)
+	print('total extraheat',total_extraheat)
 
 	init_inlist2()
 	init_inlist3()
@@ -100,26 +100,25 @@ while loop:
 	GD_array.append( eta_p)
 	MW_array.append( mu_p)
 
-	print(T_HEAT, "extraheat array")
+	print(T_HEAT, "total extraheat array")
 	print(T_radius,'radius_here')
-	print(abs(expect_r-rp)/expect_r, "\n\n\n")
-	ratio_arr.append((expect_r-rp)/expect_r)
+	print("expect radius: ", expect_r)
+	print("actual radius: ", rp)
+	print("ratio: ", (expect_r-rp)/expect_r, "\n\n\n")
 	if abs(expect_r-rp)/expect_r <= 0.01:
 		loop = False
 	else:
 		Factor = 15 # if iteration not converge, choose a smaller Factor 
 		extraheat *= (1+Factor*(expect_r-rp)/expect_r)#6e+27/mass_initial/mjup
 		total_extraheat *= (1+Factor*(expect_r-rp)/expect_r)
-	#break
-
-print('while count: ', cnt)
-print(ratio_arr)
+	break
 
 ##########################################################################
 ### save LOGS file
 ##########################################################################
 
-ans = input('Successful? (1/0)\n')
+#ans = input('Successful? (1/0)\n')
+ans = '0'
 while ('1' == ans):
 	if os.path.exists(LOGS_name):
 		print('directory ' + LOGS_name + ' has existed. \n')

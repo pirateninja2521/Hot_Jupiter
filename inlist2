@@ -32,13 +32,13 @@
 	change_lnPgas_flag = .true.
 	new_lnPgas_flag = .true.
 
-	pgstar_flag = .true.
+	!pgstar_flag = .true.
 
 	create_initial_model = .true.
 	radius_in_cm_for_create_initial_model = 24955500000.0
 		!1.39822e+10!r=2 1.39822e+10!3.1955500000e+10!r=3.7 2.5955500000e+10!3.4955500000e+10 ! in cm
 		
-	mass_in_gm_for_create_initial_model = 1.30962e+30 
+	mass_in_gm_for_create_initial_model = 2.1504340000000002e+30 
 		!1.5986000000e+30!m=0.63 1.1961000000e+30!1.8986000000e+30 !m=8 1.5188800000e+31  in grams
 		
 	max_tries_for_create_initial_model = 200
@@ -77,6 +77,10 @@
 	terminal_interval = 20
 	write_header_frequency = 10
 
+	!ignore warnings
+		warn_when_large_rel_run_E_err = 2
+
+
 / ! end of controls namelist
 
 
@@ -105,5 +109,6 @@
 	History_Track2_log_xaxis = .true. ! show log10 of abs value
 	History_Track2_log_yaxis = .false. ! show log10 of abs value
 	History_Track2_reverse_xaxis = .false.
+
 
 / ! end of pgstar namelist

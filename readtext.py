@@ -10,12 +10,17 @@ use_DIR_1 = True
 ##########################################
 #DIR_1 = 'LOGS_HD209458'
 DIR_1 = 'LOGS_SAM'
+DIR_1 = input('input DIR_1\n')
 #DIR_1 = 'LOGS_XO1b'
 #DIR_1 = 'LOGS_CCC'
 #DIR_1 = 'LOGS_HD_P=12d5_new_extend5_fixed'
 #DIR_1 = 'LOGS_HDP=35d4_extend5_kap=3dm2_fixed'
-kappa_v = float(eval(input('input kappa_v \n'))) #kappa_v = 4e-3
+
+#kappa_v = float(eval(input('input kappa_v \n'))) #kappa_v = 4e-3
+kappa_v = 4e-3
 T_eq = float(eval(input('input Teq \n'))) #1447
+#T_eq = 1470
+
 P_up_lim = 1e-1
 ##########################################
 #star age vs. radius

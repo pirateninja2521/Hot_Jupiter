@@ -31,7 +31,7 @@
   change_lnPgas_flag = .true.
   new_lnPgas_flag = .true.
 
-  pgstar_flag = .true.
+  !pgstar_flag = .true.
 
   set_initial_model_number = .true.
   initial_model_number = 0
@@ -89,6 +89,12 @@
   trace_atm_Paczynski_grey = .True.
       
   inject_uniform_extra_heat = <<extraheat>>!7.11e-4 !8.5e26/1.1961000000e+30
+
+  !ignore warnings
+    warn_when_large_rel_run_E_err = 2
+    warn_when_stop_checking_residuals = .false.
+
+
 
 / ! end of controls namelist
 

@@ -31,7 +31,7 @@
   change_lnPgas_flag = .true.
   new_lnPgas_flag = .true.
 
-  pgstar_flag = .true.
+  !pgstar_flag = .true.
 
   set_initial_model_number = .true.
   initial_model_number = 0
@@ -56,7 +56,8 @@
 
 &controls
 
-  min_timestep_limit = 1d-50
+  !min_timestep_limit = 1d-50
+  min_timestep_limit = 0
   use_gold_tolerances = .false.
 
   ! cmestep_limit = 1d-50
@@ -98,6 +99,7 @@
 
   !ignore warnings
     warn_when_large_rel_run_E_err = 2
+    warn_when_stop_checking_residuals = .false.
 
 / ! end of controls namelist
 

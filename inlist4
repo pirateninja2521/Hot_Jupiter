@@ -31,7 +31,7 @@
   change_lnPgas_flag = .true.
   new_lnPgas_flag = .true.
 
-  pgstar_flag = .true.
+  !pgstar_flag = .true.
 
   set_initial_model_number = .true.
   initial_model_number = 0
@@ -82,13 +82,13 @@
   atm_irradiated_opacity = 'iterated'
   
   atm_irradiated_errtol = 1d-4
-  atm_irradiated_T_eq = 1470 !1470!1430!1260 ! equilibrium temperature based on irradiation
+  atm_irradiated_T_eq = 2066 !1470!1430!1260 ! equilibrium temperature based on irradiation
 
   atm_irradiated_kap_v = 0.004!4d-3 ! opacity for irradiation
   atm_irradiated_P_surf = 1200000.0!3d4 ! 1 bar in cgs units
   trace_atm_Paczynski_grey = .True.
       
-  inject_uniform_extra_heat = 0.0007953341925538774!7.11e-4 !8.5e26/1.1961000000e+30
+  inject_uniform_extra_heat = 0.00013206636427809455!7.11e-4 !8.5e26/1.1961000000e+30
 
 / ! end of controls namelist
 
