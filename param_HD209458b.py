@@ -10,14 +10,13 @@ expect_r = 0.1396907404744788
 
 z = 0.02                    # metallicity of both planet and star
 new_z = 0.02                #for relax_z
-
-
 y = 0.273                   # helium fraction of both planet and (initial) star
-Teq = 1447
+
+Teq = 1550
 mass_initial = 0.69   
 
-total_extraheat = 5.84e26
-#total_extraheat = 0.97*(1.0415855652524089e+27)
+#total_extraheat = 5.84e26
+total_extraheat = 0.97*(1.0415855652524089e+27)
 #times 1.0001: 0.008614209530608527
 P_surf = 1.2e6
 kappa_v = 4e-3

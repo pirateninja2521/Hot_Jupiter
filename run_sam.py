@@ -3,8 +3,8 @@
 import numpy as np
 import shutil, sys, os, math
 import mesa_reader as mr
-#from param_HD209458b import *
-from param_WASP_19b import *
+from param_HD209458b import *
+#from param_WASP_19b import *
 
 def init_inlist2():
 	os.system("cp inlist2_rlx_irrad inlist2")
@@ -54,6 +54,15 @@ def init_inlist4():
 	h = open('inlist4', 'w')
 	h.write(g)
 	h.close()
+
+def run_inlist3_only():
+	init_inlist3()
+	os.system("cp inlist3 inlist")
+	os.system("./rn1")
+	exit()
+
+run_inlist3_only()
+
 
 cnt=0 #Sam
 ratio_arr=[]

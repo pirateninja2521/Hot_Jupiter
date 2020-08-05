@@ -14,16 +14,18 @@ new_z = 0.02                #for relax_z
 
 
 y = 0.273                   # helium fraction of both planet and (initial) star
-Teq = 2066
+Teq = 1470
 mass_initial = 1.133   
 
 total_extraheat = 2.84e26
-P_surf = 1.2e6
+#total_extraheat = 0
+#P_surf = 1.2e6
+P_surf = 1.7e6
 kappa_v = 4e-3
 
 rp = 0 
 record = 0
-radius_initial = 2.4955500000e+10 #4.4955500000e+10 #1.3e10 for m=0.69
+radius_initial = 4.4955500000e+10 #2.4955500000e+10 #1.3e10 for m=0.69
 Z_all_HELM = 0.06 # parameter to change e.o.s 
 extraheat = total_extraheat/mass_initial/mjup
 T_HEAT = []

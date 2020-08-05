@@ -756,6 +756,12 @@ class MesaProfileIndex:
         temp_index_data = np.genfromtxt(
             self.file_name, skip_header=MesaProfileIndex.index_start_line - 1,
             dtype=None)
+        #debug by sam
+        #print(temp_index_data)
+        temp_index_data = np.atleast_2d(temp_index_data)
+        #print(temp_index_data[:, 0])
+        #debug over
+
         self.model_number_string = MesaProfileIndex.index_names[0]
         self.profile_number_string = MesaProfileIndex.index_names[-1]
         self.index_data = temp_index_data[np.argsort(temp_index_data[:, 0])]
