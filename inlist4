@@ -82,7 +82,7 @@
   atm_irradiated_opacity = 'iterated'
   
   atm_irradiated_errtol = 1d-4
-  atm_irradiated_T_eq = 2000 !1470!1430!1260 ! equilibrium temperature based on irradiation
+  atm_irradiated_T_eq = 1447 !1470!1430!1260 ! equilibrium temperature based on irradiation
 
   atm_irradiated_kap_v = 0.004!4d-3 ! opacity for irradiation
   atm_irradiated_P_surf = 1200000.0!3d4 ! 1 bar in cgs units

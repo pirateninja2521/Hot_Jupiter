@@ -61,14 +61,14 @@ def run_inlist3_only():
 	os.system("./rn1")
 	exit()
 
-run_inlist3_only()
+#run_inlist3_only()
 
 
 cnt=0 #Sam
 ratio_arr=[]
 loop=True
 while loop:
-	os.system('rm -f *.mod')
+	#os.system('rm -f *.mod')
 	os.system('rm -f LOGS/*')
 	cnt+=1
 	print('total extraheat',total_extraheat)
