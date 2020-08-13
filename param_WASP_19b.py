@@ -14,7 +14,7 @@ new_z = 0.02                #for relax_z
 
 
 y = 0.273                   # helium fraction of both planet and (initial) star
-Teq = 1470
+Teq = 2033
 mass_initial = 1.133   
 
 total_extraheat = 2.84e26
