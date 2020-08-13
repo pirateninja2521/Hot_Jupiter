@@ -126,8 +126,8 @@ while loop:
 ### save LOGS file
 ##########################################################################
 
-#ans = input('Successful? (1/0)\n')
-ans = '0'
+ans = input('Successful? (1/0)\n')
+#ans = '0'
 while ('1' == ans):
 	if os.path.exists(LOGS_name):
 		print('directory ' + LOGS_name + ' has existed. \n')
