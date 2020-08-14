@@ -92,7 +92,7 @@
   atm_irradiated_T_eq = 1447!1470!1430!1260 ! equilibrium temperature based on irradiation
 
   atm_irradiated_kap_v = 0.004!4d-3 ! opacity for irradiation
-  atm_irradiated_P_surf = 1200000.0!3d4 ! 1 bar in cgs units
+  atm_irradiated_P_surf = 2000000.0!3d4 ! 1 bar in cgs units
   trace_atm_Paczynski_grey = .True.
 
   inject_uniform_extra_heat = 0.0007714741667772609!7.11e-4 !8.5e26/1.1961000000e+30

@@ -18,7 +18,8 @@ mass_initial = 0.69
 #total_extraheat = 5.84e26
 total_extraheat = 0.97*(1.0415855652524089e+27)
 #times 1.0001: 0.008614209530608527
-P_surf = 1.2e6
+#P_surf = 1.2e6
+P_surf = 2e6
 kappa_v = 4e-3
 
 rp = 0 
